@@ -1,0 +1,55 @@
+Advantages of Triggers in Salesforce:-
+
+Automation of Complex Business Logic:
+Triggers allow you to automate complex business processes that cannot be handled by declarative tools like workflows, process builders, or flows. They are ideal for scenarios where multiple objects are involved or when actions need to be performed before or after a record is created, updated, or deleted.
+
+Before and After Event Handling:
+Triggers can execute before or after database operations (like insert, update, delete). This gives flexibility in modifying records before saving (e.g., performing calculations) or taking actions after a record is saved (e.g., sending notifications or updating related records).
+
+Cross-Object Field Updates:
+Triggers can perform operations on related objects and update fields across different records or objects, enabling complex workflows that cannot be easily managed by declarative methods.
+
+Bulk Data Processing:
+Salesforce triggers handle bulk operations, meaning they can process a large number of records efficiently. This is important in batch operations or when dealing with multiple records during integration or data migrations.
+
+Error Handling and Validation:
+Triggers allow for custom validation logic beyond what’s possible with validation rules. You can implement complex error handling and ensure data integrity across different objects.
+
+Real-Time Processing:
+Triggers execute immediately when the relevant event (like record creation or update) occurs, making them suitable for real-time data processing and immediate responses to user actions.
+
+
+*******************************************************************
+
+Disadvantages of Triggers in Salesforce:-
+
+Maintenance Complexity:
+Triggers can quickly become difficult to manage and debug, especially in larger systems with multiple triggers on the same object. Complex logic inside triggers can make it challenging to understand the overall flow of execution and locate issues.
+
+Potential for Performance Issues:
+Improperly written triggers can cause performance bottlenecks, especially in bulk operations. If triggers are not bulkified (i.e., they are not designed to handle multiple records at once), they may exceed governor limits such as CPU time or SOQL query limits.
+
+Lack of Declarative Control:
+Unlike declarative tools (like Flow or Process Builder), which can be easily modified by admins without code knowledge, triggers require Apex coding skills. This makes it harder for non-developers to configure or adjust business logic.
+
+Governor Limits:
+Salesforce imposes strict governor limits to ensure resource efficiency. Poorly optimized triggers can hit these limits, leading to runtime errors or incomplete processing. Managing governor limits in complex systems can be difficult.
+
+Testing Requirements:
+Apex triggers require thorough test coverage. Writing test classes for triggers can be complex, especially when there are multiple dependent objects or when triggers affect other triggers or processes.
+
+Order of Execution Issues:
+When multiple triggers exist on the same object, controlling their order of execution can be challenging. This can lead to unpredictable behavior or unintended side effects, particularly if one trigger depends on the results of another.
+
+Difficulty in Tracking Changes:
+Debugging and tracking changes within triggers can be hard, as they can execute at various points in the transaction lifecycle (before or after specific DML operations). Understanding what data has changed at which point in the execution can require extensive logging or debugging.
+
+
+************************************************************
+
+Best Practices for Using Triggers:-
+
+Bulkify your code: Always design your trigger to handle multiple records (bulk operations) to avoid exceeding governor limits.
+Use Context Variables: Use trigger context variables like Trigger.new and Trigger.old to differentiate between different DML operations.
+Avoid Logic in Triggers: Keep the logic out of triggers and move it to Apex classes. Triggers should only delegate to handler classes for better organization and testability.
+One Trigger per Object: Maintain one trigger per object and handle different logic based on the operation type (insert, update, delete, etc.) within that single trigger. This prevents conflicts and makes code easier to manage.
